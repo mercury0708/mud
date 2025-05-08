@@ -18,10 +18,8 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-
     - name: Make mvnw executable
       run: chmod +x ./mvnw
-
 
     - name: Build with Maven
       run: ./mvnw package -DskipTests
@@ -33,10 +31,9 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.CR_PAT }}
 
-
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
         context: .
         push: true
-        tags: ghcr.io/${{ github.repository }}:latest
+        tags: ghcr.io/${{ github.repository_owner }}/mud:latest
